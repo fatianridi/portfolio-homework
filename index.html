@@ -1,0 +1,1753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>林墨 · 个人作品集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0d12;
+    --bg-soft:#14141c;
+    --card:#1a1a24;
+    --card-2:#20202c;
+    --border:rgba(255,255,255,0.08);
+    --text:#f4f4f8;
+    --muted:#a0a0b0;
+    --accent:#7c5cff;
+    --accent-2:#22d3ee;
+    --accent-3:#ff7ac6;
+    --grad:linear-gradient(135deg,#7c5cff 0%,#22d3ee 50%,#ff7ac6 100%);
+    --radius:18px;
+    --shadow:0 20px 60px rgba(0,0,0,0.4);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Noto Sans SC','Space Grotesk',sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  /* ===== Nav ===== */
+  nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    backdrop-filter:blur(16px);
+    background:rgba(13,13,18,0.72);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+  .logo{font-family:'Space Grotesk';font-weight:700;font-size:17px;letter-spacing:-0.02em;display:flex;align-items:center;gap:10px}
+  .logo-mark{
+    width:30px;height:30px;border-radius:9px;background:var(--grad);
+    display:flex;align-items:center;justify-content:center;
+    font-size:15px;color:#fff;font-weight:800;
+    box-shadow:0 4px 14px rgba(124,92,255,0.4)
+  }
+  .logo-text span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .nav-links{display:flex;gap:8px;align-items:center;padding:5px;border-radius:999px;background:rgba(255,255,255,0.04);border:1px solid var(--border)}
+  .nav-links a{font-size:13px;color:var(--muted);font-weight:500;padding:7px 14px;border-radius:999px;transition:color .2s,background .2s}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.06)}
+  .nav-links a.active{color:#fff;background:var(--grad)}
+  .btn-contact{
+    padding:9px 18px;border-radius:999px;
+    background:var(--grad);color:#fff;font-weight:600;font-size:13px;
+    transition:transform .2s,box-shadow .2s;
+  }
+  .btn-contact:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,92,255,0.4)}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none}
+  .burger span{width:22px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+  /* hero 内的胶囊式水平导航（头像下方） */
+  .hero-nav{
+    grid-column:1 / -1;justify-self:center;margin-top:56px;
+    display:inline-flex;align-items:center;gap:6px;
+    padding:8px;border-radius:999px;position:relative;
+    background:rgba(20,20,28,0.6);backdrop-filter:blur(16px);
+    border:1px solid var(--border);
+    box-shadow:0 20px 50px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.06);
+    animation:bob 5s ease-in-out infinite;
+  }
+  .hero-nav-item{
+    display:flex;align-items:center;gap:8px;
+    padding:11px 20px;border-radius:999px;cursor:pointer;
+    font-size:14px;font-weight:600;color:var(--muted);
+    position:relative;z-index:2;transition:color .25s;
+  }
+  .hero-nav-item .ico{
+    width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    font-size:14px;background:rgba(255,255,255,0.05);transition:all .25s
+  }
+  .hero-nav-item:hover{color:var(--text)}
+  .hero-nav-item:hover .ico{background:rgba(124,92,255,0.25);transform:scale(1.08)}
+  .hero-nav-item.active{color:#fff}
+  .hero-nav-item.active .ico{background:var(--grad);box-shadow:0 6px 16px rgba(124,92,255,0.45)}
+  .hero-nav-slider{
+    position:absolute;top:8px;bottom:8px;left:8px;border-radius:999px;
+    background:linear-gradient(135deg,rgba(124,92,255,0.18),rgba(34,211,238,0.12));
+    border:1px solid rgba(124,92,255,0.35);
+    transition:left .35s cubic-bezier(.2,.9,.3,1),width .35s cubic-bezier(.2,.9,.3,1);
+    z-index:1;opacity:0
+  }
+  .hero-nav-slider.show{opacity:1}
+
+  /* ===== Hero ===== */
+  header.hero{
+    position:relative;
+    padding:160px 0 100px;
+    overflow:hidden;
+  }
+  .hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+  .blob{position:absolute;border-radius:50%;filter:blur(80px);opacity:0.5}
+  .blob.b1{width:480px;height:480px;background:#7c5cff;top:-120px;right:-100px;animation:float 12s ease-in-out infinite}
+  .blob.b2{width:420px;height:420px;background:#22d3ee;bottom:-160px;left:-80px;animation:float 14s ease-in-out infinite reverse}
+  .blob.b3{width:300px;height:300px;background:#ff7ac6;top:30%;left:40%;animation:float 10s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.1)}}
+  .hero-inner{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .hero-text .tagline-pill{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:8px 16px;border-radius:999px;
+    background:rgba(124,92,255,0.12);border:1px solid rgba(124,92,255,0.3);
+    color:var(--accent);font-size:13px;font-weight:500;margin-bottom:24px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:#4ade80;box-shadow:0 0 12px #4ade80;animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+  h1.hero-name{
+    font-size:clamp(40px,6vw,76px);font-weight:900;line-height:1.05;
+    letter-spacing:-0.03em;margin-bottom:20px;
+  }
+  h1.hero-name .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .hero-sub{font-size:18px;color:var(--muted);max-width:480px;margin-bottom:32px}
+  .hero-cta{display:flex;gap:16px;flex-wrap:wrap}
+  .btn-primary,.btn-ghost{
+    padding:14px 28px;border-radius:12px;font-weight:600;font-size:15px;
+    transition:transform .2s,box-shadow .2s,border-color .2s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{background:var(--grad);color:#fff}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(124,92,255,0.45)}
+  .btn-ghost{background:var(--card);border:1px solid var(--border);color:var(--text)}
+  .btn-ghost:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .hero-stats{display:flex;gap:32px;margin-top:48px}
+  .stat-num{font-family:'Space Grotesk';font-size:30px;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .stat-lbl{font-size:13px;color:var(--muted)}
+
+  /* avatar */
+  .avatar-wrap{position:relative;justify-self:center;width:100%;max-width:420px}
+  .avatar-ring{
+    position:absolute;inset:-12px;border-radius:50%;
+    background:var(--grad);animation:spin 18s linear infinite;
+    filter:blur(2px);opacity:0.85;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .avatar-ring::after{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--bg)}
+  .avatar{
+    position:relative;z-index:2;width:100%;aspect-ratio:1;border-radius:50%;
+    object-fit:cover;border:6px solid var(--bg);
+    box-shadow:var(--shadow);
+  }
+  .float-chip{
+    position:absolute;z-index:3;padding:10px 16px;border-radius:14px;
+    background:rgba(26,26,36,0.85);backdrop-filter:blur(10px);
+    border:1px solid var(--border);font-size:13px;font-weight:600;
+    display:flex;align-items:center;gap:8px;
+    animation:bob 4s ease-in-out infinite;
+  }
+  .float-chip.c1{top:8%;left:-6%;color:var(--accent-2)}
+  .float-chip.c2{bottom:14%;right:-8%;color:var(--accent-3);animation-delay:1.5s}
+  .float-chip.c3{bottom:46%;left:-12%;color:var(--accent);animation-delay:.8s}
+  @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+  /* ===== Sections ===== */
+  section{padding:90px 0}
+  .section-head{text-align:center;margin-bottom:56px}
+  .eyebrow{
+    display:inline-block;font-family:'Space Grotesk';font-size:13px;font-weight:600;
+    letter-spacing:0.15em;text-transform:uppercase;color:var(--accent);
+    padding:6px 14px;border-radius:999px;background:rgba(124,92,255,0.1);margin-bottom:14px;
+  }
+  h2.section-title{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-0.02em}
+  h2.section-title .grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .section-desc{color:var(--muted);max-width:560px;margin:14px auto 0}
+
+  /* ===== Skills ===== */
+  .skill-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px}
+  .skill-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:28px;transition:transform .3s,border-color .3s,background .3s;
+    cursor:pointer;position:relative;
+  }
+  .skill-card:hover{transform:translateY(-6px);border-color:rgba(124,92,255,0.4);background:var(--card-2)}
+  .skill-icon{
+    width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+    font-size:24px;margin-bottom:16px;
+  }
+  .skill-card h3{font-size:18px;margin-bottom:10px}
+  .skill-card p{font-size:14px;color:var(--muted);margin-bottom:16px}
+  .skill-more{
+    margin-top:18px;padding-top:16px;border-top:1px solid var(--border);
+    font-size:13px;font-weight:600;color:var(--accent);display:flex;align-items:center;justify-content:space-between;
+  }
+  .skill-more .arrow{transition:transform .25s}
+  .skill-card:hover .skill-more .arrow{transform:translateX(4px)}
+  /* skill detail modal */
+  .skill-banner{
+    padding:40px 32px;display:flex;align-items:center;gap:24px;
+    border-radius:24px 24px 0 0;position:relative;overflow:hidden;
+  }
+  .skill-banner::before{content:"";position:absolute;inset:0;opacity:0.18}
+  .skill-banner.b1::before{background:linear-gradient(135deg,#7c5cff,transparent)}
+  .skill-banner.b2::before{background:linear-gradient(135deg,#22d3ee,transparent)}
+  .skill-banner.b3::before{background:linear-gradient(135deg,#ff7ac6,transparent)}
+  .skill-banner.b4::before{background:linear-gradient(135deg,#4ade80,transparent)}
+  .skill-banner-emoji{
+    width:72px;height:72px;border-radius:20px;display:flex;align-items:center;justify-content:center;
+    font-size:38px;position:relative;z-index:1;
+    background:rgba(255,255,255,0.06);border:1px solid var(--border);
+  }
+  .skill-banner-info{position:relative;z-index:1}
+  .skill-banner-info .cat{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:4px}
+  .skill-banner-info h3{font-size:26px;font-weight:800;letter-spacing:-0.02em}
+  .skill-level{display:flex;align-items:center;gap:14px;margin:24px 0}
+  .skill-level-bar{flex:1;height:10px;border-radius:6px;background:rgba(255,255,255,0.08);overflow:hidden}
+  .skill-level-fill{height:100%;border-radius:6px;background:var(--grad);transition:width 1s cubic-bezier(.2,.9,.3,1)}
+  .skill-level-num{font-family:'Space Grotesk';font-weight:700;font-size:18px}
+  .skill-spec{display:grid;grid-template-columns:1fr 1fr;gap:12px 24px;margin:8px 0 20px}
+  .skill-spec-item{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text)}
+  .skill-spec-item .chk{color:var(--accent-2);font-weight:700}
+  /* cases list (clickable) */
+  #skillCases{list-style:none;padding:0;margin:0}
+  #skillCases .case-item{
+    display:flex;align-items:center;gap:12px;padding:14px 16px;margin:8px 0;
+    border-radius:12px;cursor:pointer;position:relative;
+    background:rgba(255,255,255,0.02);border:1px solid var(--border);
+    transition:background .22s,border-color .22s,transform .22s;
+  }
+  #skillCases .case-item::before{content:none}
+  #skillCases .case-item:hover,#skillCases .case-item:focus-visible{
+    background:rgba(124,92,255,0.1);border-color:rgba(124,92,255,0.45);transform:translateX(4px);outline:none}
+  #skillCases .case-bullet{color:var(--accent);font-size:14px;flex-shrink:0;transition:transform .22s}
+  #skillCases .case-item:hover .case-bullet{transform:rotate(90deg)}
+  #skillCases .case-title{flex:1;font-weight:500;color:var(--text);font-size:14px}
+  #skillCases .case-project{font-size:12px;color:var(--muted);flex-shrink:0}
+  #skillCases .case-cta{font-size:12px;color:var(--accent);font-weight:600;opacity:0;transition:opacity .22s;flex-shrink:0;white-space:nowrap}
+  #skillCases .case-item:hover .case-cta{opacity:1}
+  @media(max-width:600px){
+    #skillCases .case-project,#skillCases .case-cta{display:none}
+  }
+  /* case results grid */
+  .case-results{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:4px}
+  .case-result-card{
+    padding:18px 14px;border-radius:12px;text-align:center;
+    background:rgba(124,92,255,0.08);border:1px solid rgba(124,92,255,0.22)
+  }
+  .case-result-val{
+    font-family:'Space Grotesk';font-size:24px;font-weight:700;line-height:1.1;
+    background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .case-result-lbl{font-size:12px;color:var(--muted);margin-top:6px}
+  .tags{display:flex;flex-wrap:wrap;gap:8px}
+  .tag{
+    padding:6px 12px;border-radius:8px;font-size:12px;font-weight:500;
+    background:rgba(255,255,255,0.05);border:1px solid var(--border);
+    transition:all .2s;
+  }
+  .tag:hover{background:rgba(124,92,255,0.15);border-color:rgba(124,92,255,0.4);color:var(--accent)}
+
+  /* ===== Works ===== */
+  .works-filter{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:40px}
+  .filter-btn{
+    padding:8px 18px;border-radius:999px;background:transparent;border:1px solid var(--border);
+    color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;
+  }
+  .filter-btn.active,.filter-btn:hover{background:var(--grad);color:#fff;border-color:transparent}
+  .works-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px}
+  .work-card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;
+    cursor:pointer;position:relative;
+  }
+  .work-card:hover{transform:translateY(-8px);border-color:rgba(124,92,255,0.5);box-shadow:0 30px 60px rgba(0,0,0,0.5)}
+  .work-img{width:100%;aspect-ratio:16/10;overflow:hidden;position:relative}
+  .work-img img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+  .work-card:hover .work-img img{transform:scale(1.08)}
+  .work-overlay{
+    position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,18,0.9),transparent);
+    display:flex;align-items:flex-end;padding:20px;opacity:0;transition:opacity .3s;
+  }
+  .work-card:hover .work-overlay{opacity:1}
+  .work-overlay span{
+    padding:8px 16px;border-radius:999px;background:var(--grad);color:#fff;
+    font-size:13px;font-weight:600;
+  }
+  .work-body{padding:24px}
+  .work-cat{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+  .work-title{font-size:20px;font-weight:700;margin-bottom:8px}
+  .work-desc{font-size:14px;color:var(--muted);margin-bottom:14px}
+  .work-tags{display:flex;gap:6px;flex-wrap:wrap}
+  .work-tags .tag{font-size:11px;padding:4px 10px}
+
+  /* ===== Contact ===== */
+  .contact-card{
+    background:linear-gradient(135deg,rgba(124,92,255,0.15),rgba(34,211,238,0.08));
+    border:1px solid var(--border);border-radius:28px;padding:64px 40px;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .contact-card::before{
+    content:"";position:absolute;width:300px;height:300px;border-radius:50%;
+    background:var(--accent);filter:blur(120px);opacity:0.3;top:-100px;left:50%;transform:translateX(-50%);
+  }
+  .contact-card > *{position:relative;z-index:1}
+  .contact-card h2{font-size:clamp(28px,4vw,42px);font-weight:800;margin-bottom:14px}
+  .contact-card p{color:var(--muted);max-width:480px;margin:0 auto 32px}
+  .contact-links{display:flex;flex-wrap:wrap;gap:14px;justify-content:center}
+  .contact-link{
+    display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;
+    background:var(--card);border:1px solid var(--border);font-weight:500;font-size:14px;
+    transition:all .25s;
+  }
+  .contact-link:hover{transform:translateY(-3px);border-color:var(--accent);background:var(--card-2)}
+  .contact-link svg{width:18px;height:18px}
+
+  /* ===== Modal ===== */
+  .modal-overlay{
+    position:fixed;inset:0;z-index:200;display:none;
+    background:rgba(8,8,12,0.78);backdrop-filter:blur(8px);
+    align-items:center;justify-content:center;padding:24px;
+    opacity:0;transition:opacity .3s;
+  }
+  .modal-overlay.open{display:flex;opacity:1}
+  .modal{
+    width:100%;max-width:720px;max-height:90vh;overflow-y:auto;
+    background:var(--card);border:1px solid var(--border);border-radius:24px;
+    box-shadow:var(--shadow);position:relative;
+    transform:translateY(24px) scale(0.98);transition:transform .35s cubic-bezier(.2,.9,.3,1);
+  }
+  .modal-overlay.open .modal{transform:translateY(0) scale(1)}
+  .modal::-webkit-scrollbar{width:8px}
+  .modal::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:8px}
+  .modal-close{
+    position:absolute;top:18px;right:18px;z-index:5;
+    width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+    background:rgba(13,13,18,0.7);backdrop-filter:blur(8px);
+    color:var(--text);font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+    transition:all .2s;
+  }
+  .modal-close:hover{background:var(--accent);border-color:var(--accent);transform:rotate(90deg)}
+  .modal-banner{width:100%;aspect-ratio:16/9;overflow:hidden;border-radius:24px 24px 0 0}
+  .modal-banner img{width:100%;height:100%;object-fit:cover}
+  .modal-body{padding:32px}
+  .modal-cat{font-size:12px;color:var(--accent);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px}
+  .modal-title{font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px}
+  .modal-meta{display:flex;flex-wrap:wrap;gap:20px;padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin:20px 0}
+  .meta-item{display:flex;flex-direction:column;gap:2px}
+  .meta-lbl{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+  .meta-val{font-size:14px;font-weight:600}
+  .modal-section{margin-bottom:22px}
+  .modal-section h4{font-size:14px;font-weight:700;margin-bottom:10px;color:var(--accent-2)}
+  .modal-section p{font-size:15px;color:var(--muted);line-height:1.75}
+  .modal-section ul{list-style:none;padding:0}
+  .modal-section li{font-size:14px;color:var(--muted);padding:6px 0 6px 22px;position:relative}
+  .modal-section li::before{content:"✦";position:absolute;left:0;color:var(--accent)}
+  .modal-tech{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+  .modal-actions{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap}
+  .modal-actions a{padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;transition:all .2s}
+  .modal-actions .btn-primary{background:var(--grad);color:#fff}
+  .modal-actions .btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(124,92,255,0.4)}
+  .modal-actions .btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .modal-actions .btn-ghost:hover{border-color:var(--accent)}
+  /* action detail view (内嵌在 modal 内) */
+  .modal-views{position:relative}
+  .modal-view{display:none}
+  .modal-view.active{display:block;animation:fadeIn .35s ease}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+  .action-back{
+    display:inline-flex;align-items:center;gap:8px;margin-bottom:20px;
+    padding:8px 16px;border-radius:999px;cursor:pointer;
+    background:rgba(255,255,255,0.04);border:1px solid var(--border);
+    font-size:13px;font-weight:600;color:var(--muted);transition:all .2s;
+  }
+  .action-back:hover{color:var(--text);border-color:var(--accent);background:rgba(124,92,255,0.1)}
+  .action-back .arr{transition:transform .2s}
+  .action-back:hover .arr{transform:translateX(-3px)}
+  .action-type-pill{
+    display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;
+    font-size:12px;font-weight:600;margin-bottom:14px;
+  }
+  .action-type-pill.demo{background:rgba(34,211,238,0.15);color:var(--accent-2)}
+  .action-type-pill.doc{background:rgba(124,92,255,0.15);color:var(--accent)}
+  .action-type-pill.download{background:rgba(255,122,198,0.15);color:var(--accent-3)}
+  .action-title{font-size:24px;font-weight:800;letter-spacing:-0.02em;margin-bottom:12px}
+  .action-intro{font-size:15px;color:var(--muted);line-height:1.7;margin-bottom:24px}
+  .action-sections{display:flex;flex-direction:column;gap:18px;margin-bottom:24px}
+  .action-section{padding:18px 20px;border-radius:14px;background:rgba(255,255,255,0.025);border:1px solid var(--border)}
+  .action-section h5{font-size:13px;font-weight:700;color:var(--accent-2);margin-bottom:8px;letter-spacing:0.05em;text-transform:uppercase}
+  .action-section p{font-size:14px;color:var(--text);line-height:1.7}
+  .action-section .code-like{
+    display:inline-block;padding:4px 10px;border-radius:6px;
+    background:rgba(124,92,255,0.12);color:var(--accent);
+    font-family:'Space Grotesk',monospace;font-size:13px;
+  }
+  .action-tips{list-style:none;padding:0;margin:0 0 24px}
+  .action-tips li{font-size:14px;color:var(--muted);padding:8px 0 8px 26px;position:relative;line-height:1.6}
+  .action-tips li::before{content:"💡";position:absolute;left:0;font-size:14px}
+  .action-cta-row{display:flex;gap:12px;flex-wrap:wrap;padding-top:20px;border-top:1px solid var(--border)}
+  .action-cta-row a{
+    padding:13px 24px;border-radius:12px;font-weight:600;font-size:14px;
+    display:inline-flex;align-items:center;gap:8px;transition:all .2s;
+  }
+  .action-cta-row .primary{background:var(--grad);color:#fff}
+  .action-cta-row .primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(124,92,255,0.45)}
+  .action-cta-row .ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .action-cta-row .ghost:hover{border-color:var(--accent)}
+  body.no-scroll{overflow:hidden}
+
+  /* ===== Footer ===== */
+  footer{padding:40px 0;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:13px}
+
+  /* ===== Reveal animation ===== */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+
+  /* ===== Responsive ===== */
+  @media(max-width:860px){
+    .nav-links{display:none}
+    .nav .btn-contact{display:none}
+    .burger{display:flex}
+    .hero-inner{grid-template-columns:1fr;text-align:center;gap:36px}
+    .hero-cta,.hero-stats,.tagline-pill{justify-content:center}
+    .hero-sub{margin-left:auto;margin-right:auto}
+    .avatar-wrap{max-width:240px;margin:0 auto}
+    .float-chip{display:none}
+    .hero-nav{margin-top:8px;flex-wrap:wrap;justify-content:center;max-width:100%;animation:none}
+    .hero-nav-item{padding:9px 14px;font-size:13px}
+    .hero-nav-item .ico{width:24px;height:24px;font-size:12px}
+    header.hero{padding:120px 0 70px}
+  }
+  @media(max-width:480px){
+    .hero-nav-item span:not(.ico){display:none}
+    .hero-nav-item{padding:10px}
+  }
+</style>
+</head>
+<body>
+  <!-- 作业标识 -->
+  <div style="position:fixed;top:14px;right:14px;z-index:9999;padding:8px 16px;border-radius:999px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;font-size:13px;font-weight:700;box-shadow:0 6px 20px rgba(124,92,255,0.45);letter-spacing:0.02em;cursor:default" title="本页面为课程作业演示">此乃作业 · 仅供学习交流</div>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <div class="wrap nav-inner">
+    <a href="#home" class="logo">
+      <span class="logo-mark">林</span>
+      <span class="logo-text">林<span>墨</span> · LINMO</span>
+    </a>
+    <div class="nav-links">
+      <a href="#skills">技能</a>
+      <a href="#works">作品</a>
+      <a href="#contact">联系</a>
+    </div>
+    <a href="#contact" class="btn-contact">联系我 ✦</a>
+    <button class="burger" onclick="document.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero" id="home">
+  <div class="hero-bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="blob b3"></div>
+  </div>
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <div class="tagline-pill"><span class="dot"></span> 正在接受新项目合作</div>
+      <h1 class="hero-name">你好，我是<br><span class="grad">林墨</span> ✦</h1>
+      <p class="hero-sub">全栈开发者 / UI 设计师，专注于打造简洁、高效、有温度的数字产品。热爱把复杂的想法变成优雅的交互体验。</p>
+      <div class="hero-cta">
+        <a href="#works" class="btn-primary">查看作品 →</a>
+        <a href="#contact" class="btn-ghost">下载简历</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num">5+</div><div class="stat-lbl">年开发经验</div></div>
+        <div><div class="stat-num">40+</div><div class="stat-lbl">完成项目</div></div>
+        <div><div class="stat-num">20+</div><div class="stat-lbl">合作客户</div></div>
+      </div>
+    </div>
+    <div class="avatar-wrap">
+      <div class="avatar-ring"></div>
+      <img class="avatar" src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Professional%20digital%20avatar%20portrait%20of%20a%20young%20Asian%20creative%20professional%2C%20modern%20flat%20illustration%20style%2C%20soft%20purple%20and%20cyan%20gradient%20background%2C%20friendly%20confident%20expression%2C%20minimalist%2C%20clean%20vector%20art&image_size=square" alt="林墨的头像" />
+      <div class="float-chip c1">⚛ React</div>
+      <div class="float-chip c2">🎨 UI/UX</div>
+      <div class="float-chip c3">🚀 全栈</div>
+    </div>
+    <!-- 头像下方的胶囊式水平导航 -->
+    <div class="hero-nav" role="navigation" aria-label="主导航">
+      <span class="hero-nav-slider" id="heroNavSlider"></span>
+      <a href="#skills" class="hero-nav-item active" data-nav="skills">
+        <span class="ico">⚡</span>技能
+      </a>
+      <a href="#works" class="hero-nav-item" data-nav="works">
+        <span class="ico">🎨</span>作品
+      </a>
+      <a href="#contact" class="hero-nav-item" data-nav="contact">
+        <span class="ico">✉</span>联系
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Skills</span>
+      <h2 class="section-title">我的<span class="grad">技能栈</span></h2>
+      <p class="section-desc">从前端到后端，从设计到部署，覆盖完整的产品研发链路。</p>
+    </div>
+    <div class="skill-grid">
+      <div class="skill-card reveal">
+        <div class="skill-icon" style="background:rgba(124,92,255,0.15)">💻</div>
+        <h3>前端开发</h3>
+        <p>构建响应式、高性能的现代 Web 应用界面。</p>
+        <div class="tags">
+          <span class="tag">React</span><span class="tag">Vue 3</span><span class="tag">TypeScript</span>
+          <span class="tag">Next.js</span><span class="tag">Tailwind CSS</span>
+        </div>
+        <div class="skill-more">查看技能详情 <span class="arrow">→</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon" style="background:rgba(34,211,238,0.15)">⚙️</div>
+        <h3>后端 & 数据</h3>
+        <p>设计稳定的 API 与数据架构，支撑业务增长。</p>
+        <div class="tags">
+          <span class="tag">Node.js</span><span class="tag">Python</span><span class="tag">PostgreSQL</span>
+          <span class="tag">Redis</span><span class="tag">GraphQL</span>
+        </div>
+        <div class="skill-more">查看技能详情 <span class="arrow">→</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon" style="background:rgba(255,122,198,0.15)">🎨</div>
+        <h3>设计 & 体验</h3>
+        <p>从用户研究到视觉呈现，输出一致的设计语言。</p>
+        <div class="tags">
+          <span class="tag">Figma</span><span class="tag">UI/UX</span><span class="tag">设计系统</span>
+          <span class="tag">动效</span><span class="tag">原型</span>
+        </div>
+        <div class="skill-more">查看技能详情 <span class="arrow">→</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <div class="skill-icon" style="background:rgba(74,222,128,0.15)">☁️</div>
+        <h3>工程 & 部署</h3>
+        <p>自动化流水线与云原生实践，保障稳定交付。</p>
+        <div class="tags">
+          <span class="tag">Docker</span><span class="tag">CI/CD</span><span class="tag">AWS</span>
+          <span class="tag">Vercel</span><span class="tag">Nginx</span>
+        </div>
+        <div class="skill-more">查看技能详情 <span class="arrow">→</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WORKS ============ -->
+<section id="works">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Portfolio</span>
+      <h2 class="section-title">精选<span class="grad">作品展示</span></h2>
+      <p class="section-desc">一些我引以为豪的项目，覆盖 Web 应用、设计与产品研发。</p>
+    </div>
+
+    <div class="works-filter reveal">
+      <button class="filter-btn active" data-filter="all">全部</button>
+      <button class="filter-btn" data-filter="web">Web 应用</button>
+      <button class="filter-btn" data-filter="design">设计</button>
+      <button class="filter-btn" data-filter="mobile">移动端</button>
+    </div>
+
+    <div class="works-grid">
+      <div class="work-card reveal" data-cat="web">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20SaaS%20analytics%20dashboard%20UI%20design%2C%20dark%20theme%2C%20purple%20and%20cyan%20accent%20colors%2C%20charts%20and%20data%20visualization%2C%20clean%20minimal%20interface%2C%20professional%20product%20screenshot&image_size=landscape_16_9" alt="数据分析平台" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">Web 应用</div>
+          <h3 class="work-title">Pulse 数据分析平台</h3>
+          <p class="work-desc">面向中小团队的实时业务数据分析与可视化 SaaS 平台。</p>
+          <div class="work-tags"><span class="tag">React</span><span class="tag">D3.js</span><span class="tag">Node</span></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-cat="design">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Elegant%20brand%20identity%20design%20mockup%2C%20minimalist%20logo%20and%20stationery%2C%20soft%20gradient%20colors%2C%20modern%20typography%2C%20creative%20design%20portfolio%20piece%2C%20professional%20presentation&image_size=landscape_16_9" alt="品牌视觉设计" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">设计</div>
+          <h3 class="work-title">Aurora 品牌视觉系统</h3>
+          <p class="work-desc">为一家创意工作室打造的完整品牌识别与设计系统。</p>
+          <div class="work-tags"><span class="tag">Figma</span><span class="tag">品牌</span><span class="tag">VI</span></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-cat="mobile">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20mobile%20app%20UI%20design%20mockup%2C%20finance%20and%20budgeting%20app%2C%20clean%20interface%2C%20soft%20gradient%20background%2C%20card%20based%20layout%2C%20professional%20product%20screenshot%2C%20smartphone%20screen&image_size=landscape_16_9" alt="记账 App" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">移动端</div>
+          <h3 class="work-title">Coin 记账 App</h3>
+          <p class="work-desc">极简风格的个人记账应用，主打快速记录与洞察分析。</p>
+          <div class="work-tags"><span class="tag">React Native</span><span class="tag">UI</span></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-cat="web">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20e-commerce%20website%20homepage%20design%2C%20fashion%20store%2C%20elegant%20product%20grid%2C%20clean%20minimal%20layout%2C%20soft%20neutral%20colors%2C%20professional%20web%20design%20screenshot&image_size=landscape_16_9" alt="电商网站" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">Web 应用</div>
+          <h3 class="work-title">Lumen 独立电商网站</h3>
+          <p class="work-desc">为设计师品牌打造的高转化率独立站，含完整购物流程。</p>
+          <div class="work-tags"><span class="tag">Next.js</span><span class="tag">Stripe</span></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-cat="design">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Beautiful%20design%20system%20component%20library%20showcase%2C%20UI%20kit%2C%20buttons%20cards%20forms%2C%20consistent%20design%20tokens%2C%20purple%20cyan%20palette%2C%20modern%20interface%20elements%2C%20professional%20presentation&image_size=landscape_16_9" alt="设计系统" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">设计</div>
+          <h3 class="work-title">Nebula 组件设计系统</h3>
+          <p class="work-desc">一套跨产品的设计语言与可复用组件库，提升研发效率。</p>
+          <div class="work-tags"><span class="tag">设计系统</span><span class="tag">Storybook</span></div>
+        </div>
+      </div>
+
+      <div class="work-card reveal" data-cat="mobile">
+        <div class="work-img">
+          <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20fitness%20tracking%20mobile%20app%20UI%2C%20workout%20dashboard%2C%20progress%20rings%20and%20charts%2C%20vibrant%20gradient%20colors%2C%20clean%20card%20layout%2C%20smartphone%20screen%20mockup%2C%20professional%20design&image_size=landscape_16_9" alt="健身 App" />
+          <div class="work-overlay"><span>查看详情 →</span></div>
+        </div>
+        <div class="work-body">
+          <div class="work-cat">移动端</div>
+          <h3 class="work-title">Flow 健身追踪 App</h3>
+          <p class="work-desc">结合 AI 教练的个性化健身计划与数据追踪应用。</p>
+          <div class="work-tags"><span class="tag">Flutter</span><span class="tag">AI</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>让我们一起<span style="background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">创造点什么</span> ✦</h2>
+      <p>无论是项目合作、自由职业机会，还是单纯想聊聊产品与设计，都欢迎随时联系我。通常 24 小时内回复。</p>
+      <div class="contact-links">
+        <a href="mailto:hello@linmo.design" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 5L2 7"/></svg>
+          hello@linmo.design
+        </a>
+        <a href="tel:+8613800001380" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +86 138-0000-1380
+        </a>
+        <a href="#" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.02c-3.2.7-3.88-1.54-3.88-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.56-.29-5.25-1.28-5.25-5.7 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.43-2.7 5.41-5.27 5.69.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.8.55A11.5 11.5 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+          GitHub
+        </a>
+        <a href="#" class="contact-link">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.26.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.26.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.7 3.7 0 0 1-1.38-.9 3.7 3.7 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23-.06-1.26-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zm0 3.24a6.6 6.6 0 1 0 0 13.2 6.6 6.6 0 0 0 0-13.2zm0 10.89a4.29 4.29 0 1 1 0-8.58 4.29 4.29 0 0 1 0 8.58zm6.85-11.14a1.54 1.54 0 1 0 0 3.08 1.54 1.54 0 0 0 0-3.08z"/></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">© 2026 林墨 LINMO · 用代码与设计创造价值</div>
+</footer>
+
+<!-- ============ WORK DETAIL MODAL ============ -->
+<div class="modal-overlay" id="workModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="关闭">✕</button>
+    <div class="modal-banner"><img id="modalImg" src="" alt="" /></div>
+    <div class="modal-body">
+      <div class="modal-views">
+        <!-- 主视图：项目详情 -->
+        <div class="modal-view active" id="modalMainView">
+          <div class="modal-cat" id="modalCat"></div>
+          <h3 class="modal-title" id="modalTitle"></h3>
+          <p id="modalDesc" style="font-size:16px;color:var(--muted);line-height:1.7"></p>
+          <div class="modal-meta" id="modalMeta"></div>
+          <div class="modal-section">
+            <h4>项目概述</h4>
+            <p id="modalOverview"></p>
+          </div>
+          <div class="modal-section">
+            <h4>核心功能与亮点</h4>
+            <ul id="modalFeatures"></ul>
+          </div>
+          <div class="modal-section">
+            <h4>技术栈</h4>
+            <div class="modal-tech" id="modalTech"></div>
+          </div>
+          <div class="modal-actions" id="modalActions"></div>
+        </div>
+        <!-- 详情视图：操作按钮对应的内容 -->
+        <div class="modal-view" id="modalActionView">
+          <div class="action-back" id="actionBack" role="button" tabindex="0">
+            <span class="arr">←</span> 返回项目详情
+          </div>
+          <div class="action-type-pill" id="actionTypePill"></div>
+          <h3 class="action-title" id="actionTitle"></h3>
+          <p class="action-intro" id="actionIntro"></p>
+          <div class="action-sections" id="actionSections"></div>
+          <ul class="action-tips" id="actionTips"></ul>
+          <div class="modal-section">
+            <h4>相关技术</h4>
+            <div class="modal-tech" id="actionTech"></div>
+          </div>
+          <div class="action-cta-row" id="actionCtaRow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ SKILL DETAIL MODAL ============ -->
+<div class="modal-overlay" id="skillModal" role="dialog" aria-modal="true" aria-labelledby="skillModalTitle">
+  <div class="modal">
+    <button class="modal-close" id="skillModalClose" aria-label="关闭">✕</button>
+    <div class="skill-banner" id="skillBanner">
+      <div class="skill-banner-emoji" id="skillEmoji"></div>
+      <div class="skill-banner-info">
+        <div class="cat" id="skillCat"></div>
+        <h3 id="skillModalTitle"></h3>
+      </div>
+    </div>
+    <div class="modal-body">
+      <p id="skillDesc" style="font-size:16px;color:var(--muted);line-height:1.7"></p>
+      <div class="skill-level">
+        <span style="font-size:13px;color:var(--muted)">熟练度</span>
+        <div class="skill-level-bar"><div class="skill-level-fill" id="skillLevelFill"></div></div>
+        <span class="skill-level-num" id="skillLevelNum"></span>
+      </div>
+      <div class="skill-spec" id="skillSpec"></div>
+      <div class="modal-section">
+        <h4>能力详解</h4>
+        <p id="skillOverview"></p>
+      </div>
+      <div class="modal-section">
+        <h4>核心能力点</h4>
+        <ul id="skillPoints"></ul>
+      </div>
+      <div class="modal-section">
+        <h4>常用工具与技术</h4>
+        <div class="modal-tech" id="skillTech"></div>
+      </div>
+      <div class="modal-section">
+        <h4>代表性实践</h4>
+        <ul id="skillCases"></ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ CASE DETAIL MODAL ============ -->
+<div class="modal-overlay" id="caseModal" role="dialog" aria-modal="true" aria-labelledby="caseModalTitle">
+  <div class="modal">
+    <button class="modal-close" id="caseModalClose" aria-label="关闭">✕</button>
+    <div class="modal-banner"><img id="caseImg" src="" alt="" /></div>
+    <div class="modal-body">
+      <div class="modal-cat" id="caseSkillCat"></div>
+      <h3 class="modal-title" id="caseModalTitle"></h3>
+      <p id="caseDesc" style="font-size:16px;color:var(--muted);line-height:1.7"></p>
+      <div class="modal-meta" id="caseMeta"></div>
+      <div class="modal-section">
+        <h4>我所做的工作</h4>
+        <ul id="caseWork"></ul>
+      </div>
+      <div class="modal-section">
+        <h4>技术亮点与方案</h4>
+        <ul id="caseHighlights"></ul>
+      </div>
+      <div class="modal-section">
+        <h4>取得成果</h4>
+        <div class="case-results" id="caseResults"></div>
+      </div>
+      <div class="modal-section">
+        <h4>用到的技术</h4>
+        <div class="modal-tech" id="caseTech"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Scroll reveal
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // Works filter
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const workCards = document.querySelectorAll('.work-card');
+  filterBtns.forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      filterBtns.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      workCards.forEach(card=>{
+        const show = (f==='all' || card.dataset.cat===f);
+        card.style.display = show ? '' : 'none';
+      });
+    });
+  });
+
+  // ===== Work detail modal =====
+  const worksData = [
+    {
+      cat:'Web 应用',
+      title:'Pulse 数据分析平台',
+      desc:'面向中小团队的实时业务数据分析与可视化 SaaS 平台，让数据驱动决策变得简单直观。',
+      overview:'Pulse 是一个端到端的业务数据分析平台，帮助企业把分散在各业务系统的指标统一汇聚、清洗、建模并可视化呈现。项目从 0 到 1 完成了数据接入、实时计算、可视化看板与权限体系四大模块，目前已服务 30+ 中小团队，日均处理事件量超 200 万条。',
+      meta:[['担任角色','全栈主创'],['项目周期','2024.03 - 2024.11'],['合作客户','30+ 团队'],['项目类型','SaaS 平台']],
+      features:[
+        '支持 12+ 主流数据源一键接入（MySQL / PostgreSQL / Stripe / GA4 等）',
+        '基于 WebSocket 的实时指标推送，看板秒级刷新',
+        '拖拽式自定义看板，组件库 20+ 种图表类型',
+        '细粒度 RBAC 权限体系，支持团队/项目/看板三级授权',
+        '智能异常检测，自动识别指标突增并触发告警'
+      ],
+      tech:['React 18','TypeScript','Next.js','D3.js','Node.js','PostgreSQL','Redis','WebSocket'],
+      actions:[
+        {
+          label:'访问在线 Demo',href:'https://demo.pulse.your-portfolio.com',primary:true,type:'demo',
+          detail:{
+            title:'Pulse 数据分析平台 · 在线 Demo',
+            intro:'无需注册即可体验 Pulse 平台的核心功能。Demo 环境已预置示例数据，可直接上手拖拽看板、连接数据源与查看实时指标。',
+            sections:[
+              {h:'Demo 地址',p:'https://demo.pulse.linmo.design',code:true},
+              {h:'演示账号',p:'用户名：demo@linmo.design　|　密码：pulse2024（只读权限）'},
+              {h:'推荐体验路径',p:'① 首页 → 选择「销售分析」看板　② 拖拽新增图表组件　③ 切换时间范围观察实时指标变化　④ 进入权限设置页查看 RBAC 体系'},
+              {h:'环境说明',p:'Demo 部署在独立沙箱环境，数据每小时重置；如需保留修改，可在体验后联系我开通专属试用环境。'}
+            ],
+            tips:['建议在桌面端 Chrome / Edge 浏览器访问，体验最佳','Demo 数据为模拟业务数据，不代表真实业绩','如遇加载慢，可切换到轻量模式（首页右下角）'],
+            tech:['React 18','Next.js','PostgreSQL','Redis','WebSocket'],
+            cta:[{label:'前往 Demo ↗',href:'https://demo.pulse.your-portfolio.com',primary:true},{label:'预约一对一演示',href:'#contact'}]
+          }
+        },
+        {
+          label:'查看案例文档',href:'https://docs.pulse.your-portfolio.com',type:'doc',
+          detail:{
+            title:'Pulse 平台 · 完整案例文档',
+            intro:'案例文档涵盖项目背景、需求拆解、架构设计、关键决策与上线复盘，是面向技术评审与方案借鉴的完整资料。',
+            sections:[
+              {h:'文档结构',p:'共 5 个章节：项目背景 / 需求与挑战 / 系统架构 / 关键技术决策 / 上线效果与复盘'},
+              {h:'重点章节',p:'第 3 章「系统架构」详述了数据接入层、实时计算层、查询服务层的分层设计与选型理由；第 4 章「关键技术决策」包含 6 个核心 trade-off 的分析过程。'},
+              {h:'文档形式',p:'飞书云文档，约 8000 字 + 15 张架构图与时序图，支持评论与高亮标注。'},
+              {h:'访问方式',p:'点击下方「打开文档」会跳转到飞书文档页面，建议先登录飞书账号以获得最佳阅读体验。'}
+            ],
+            tips:['文档含敏感架构细节，已做脱敏处理','如需引用，请注明出处并联系我授权','可下载 PDF 版本归档留存'],
+            tech:['架构设计','飞书文档','时序图','技术评审'],
+            cta:[{label:'打开文档 ↗',href:'https://docs.pulse.your-portfolio.com',primary:true},{label:'下载 PDF 版本',href:'https://docs.pulse.your-portfolio.com/Pulse-Case-Study.pdf'}]
+          }
+        }
+      ]
+    },
+    {
+      cat:'设计',
+      title:'Aurora 品牌视觉系统',
+      desc:'为一家创意工作室打造的完整品牌识别与设计系统，覆盖 Logo、配色、字体、应用规范。',
+      overview:'Aurora 是为某独立创意工作室从命名到完整视觉识别系统的全流程设计项目。基于"光与流动"的核心概念，建立了一套克制而富有张力的视觉语言，并通过品牌手册规范了在印刷、数字、空间三大场景下的应用方式，让品牌在任何触点都能保持一致性。',
+      meta:[['担任角色','品牌主设计'],['项目周期','2023.09 - 2024.02'],['交付物','品牌手册 + 素材包'],['项目类型','品牌设计']],
+      features:[
+        '从命名、定位到视觉系统搭建的完整品牌构建',
+        '主标识 + 3 套延展符号系统，适配多场景应用',
+        '制定 6 色主辅色板与 2 套字体组合规范',
+        '输出 48 页品牌手册与 60+ 可复用素材',
+        '覆盖名片、网站、空间导视等 10+ 应用规范'
+      ],
+      tech:['Figma','Illustrator','品牌策略','VI 设计','动效设计','印刷规范'],
+      actions:[
+        {
+          label:'查看完整案例',href:'https://case.aurora.your-portfolio.com',primary:true,type:'doc',
+          detail:{
+            title:'Aurora 品牌视觉系统 · 完整案例',
+            intro:'本案例完整呈现了从品牌定位、命名、视觉系统设计到落地的全流程，包含设计思路推导与最终交付物展示。',
+            sections:[
+              {h:'案例包含',p:'品牌定位文档、命名推导过程、Logo 设计 3 轮迭代、配色与字体规范、48 页品牌手册预览、60+ 应用素材展示。'},
+              {h:'设计思路',p:'以「光与流动」为核心概念，从 Aurora（极光）的视觉特征提炼出渐变、流动、克制三个设计关键词，贯穿整个视觉系统。'},
+              {h:'迭代过程',p:'Logo 经历 3 轮迭代：第 1 轮几何抽象 → 第 2 轮加入流动笔触 → 第 3 轮精修比例与负空间，最终方案获得客户一次性认可。'},
+              {h:'落地效果',p:'品牌上线后用于名片、官网、空间导视、社媒模板等 10+ 触点，客户反馈「品牌调性统一且高级，对外形象提升明显」。'}
+            ],
+            tips:['案例文档含客户原始 brief，已获授权公开展示','部分素材为预览低清版，高清版需申请','案例可作为品牌设计课程的参考教材'],
+            tech:['Figma','Illustrator','品牌策略','VI 规范'],
+            cta:[{label:'打开案例 ↗',href:'https://case.aurora.your-portfolio.com',primary:true},{label:'查看设计稿源文件',href:'https://figma.aurora.your-portfolio.com'}]
+          }
+        },
+        {
+          label:'下载品牌手册',href:'https://brand.aurora.your-portfolio.com/Aurora-Brand-Guideline-v1.0.pdf',type:'download',
+          detail:{
+            title:'Aurora 品牌手册 · 下载说明',
+            intro:'品牌手册为 PDF 格式，共 48 页，涵盖品牌理念、视觉系统、应用规范三大板块，是品牌落地的执行依据。',
+            sections:[
+              {h:'文件信息',p:'文件名：Aurora-Brand-Guideline-v1.0.pdf　|　大小：18.6 MB　|　页数：48 页　|　语言：中文'},
+              {h:'手册目录',p:'01 品牌理念 / 02 主标识系统 / 03 延展符号 / 04 色彩规范 / 05 字体规范 / 06 图形语言 / 07 应用规范（印刷·数字·空间）/ 08 素材索引'},
+              {h:'使用授权',p:'手册仅供学习参考，不可直接用于商业项目；如需用于自有品牌，请联系我获取授权与定制服务。'},
+              {h:'下载方式',p:'点击下方「下载手册」会触发浏览器下载；如未自动下载，请检查浏览器弹窗拦截设置。'}
+            ],
+            tips:['建议在桌面端下载以获得最佳体验','文件较大，下载可能需要 10-30 秒','如需可编辑源文件（.fig / .ai），请联系我'],
+            tech:['PDF','Figma','Illustrator','印刷规范'],
+            cta:[{label:'下载手册 ⬇',href:'https://brand.aurora.your-portfolio.com/Aurora-Brand-Guideline-v1.0.pdf',primary:true},{label:'申请可编辑源文件',href:'#contact'}]
+          }
+        }
+      ]
+    },
+    {
+      cat:'移动端',
+      title:'Coin 记账 App',
+      desc:'极简风格的个人记账应用，主打 3 秒快速记录与智能洞察分析。',
+      overview:'Coin 是一款追求"少即是多"的个人记账应用。通过分类快捷键、智能识别、语音输入等方式把单笔记账压缩到 3 秒内，同时基于消费数据生成可视化的月度报告与预算建议。产品上线 8 个月，App Store 评分 4.8，月活用户 5 万+。',
+      meta:[['担任角色','产品 + 设计'],['项目周期','2023.02 - 2023.08'],['用户规模','5 万+ MAU'],['项目类型','移动 App']],
+      features:[
+        '3 秒记账：快捷分类 + 金额键盘 + 自动归类',
+        '语音/拍照记账，AI 自动解析金额与类目',
+        '月度消费报告，多维度可视化洞察',
+        '预算目标设定与超支智能提醒',
+        'iCloud 多设备同步，数据端到端加密'
+      ],
+      tech:['React Native','TypeScript','Reanimated','SQLite','AI 解析','Figma'],
+      actions:[
+        {
+          label:'App Store 下载',href:'https://your-portfolio.com/coin/appstore',primary:true,type:'download',
+          detail:{
+            title:'Coin 记账 App · 下载信息',
+            intro:'Coin 已上架 App Store 与各大安卓应用市场，支持 iCloud / 账号体系多端同步，免费下载，内含可选高级订阅。',
+            sections:[
+              {h:'App Store',p:'搜索「Coin 记账」即可找到，或扫描下方二维码直达下载页。'},
+              {h:'安卓市场',p:'已上架华为应用市场、小米应用商店、应用宝，搜索「Coin 记账」即可。'},
+              {h:'版本信息',p:'当前版本 v2.4.1　|　大小 38 MB　|　兼容 iOS 14+ / Android 8+　|　语言：中英双语'},
+              {h:'付费策略',p:'基础功能免费（记账/报告/预算），高级订阅 ¥18/月：含 AI 解析、多账本、数据导出、自定义主题。'}
+            ],
+            tips:['首次启动会引导设置预算目标，可跳过','数据默认本地加密存储，开启同步需登录账号','如遇兼容问题，可在 App 内「设置-反馈」直接联系我'],
+            tech:['React Native','TypeScript','SQLite','iCloud','AI 解析'],
+            cta:[{label:'前往 App Store ↗',href:'https://your-portfolio.com/coin/appstore',primary:true},{label:'查看安卓版本',href:'https://your-portfolio.com/coin/googleplay'}]
+          }
+        },
+        {
+          label:'查看设计稿',href:'https://your-portfolio.com/coin/figma',type:'doc',
+          detail:{
+            title:'Coin 记账 · 设计稿全集',
+            intro:'完整设计稿包含信息架构、交互原型、视觉规范与组件库，是产品从 0 到 1 的设计决策全记录。',
+            sections:[
+              {h:'设计稿内容',p:'共 86 个页面：信息架构图 1 张、低保真原型 12 张、高保真视觉 56 张、组件库 17 张、动效说明 5 张。'},
+              {h:'关键设计决策',p:'3 秒记账：通过快捷分类 + 智能金额识别 + 自动归类，把单笔记账压缩到 3 秒内，是产品的核心体验锚点。'},
+              {h:'视觉风格',p:'极简 + 轻质感：大量留白、克制配色（主色 #6366F1）、卡片化布局，避免视觉噪音干扰记账这一核心动作。'},
+              {h:'访问方式',p:'Figma 链接形式，支持评论与高亮；如需可编辑副本，请联系我授权。'}
+            ],
+            tips:['设计稿含未上线的实验性方案，仅供参考','部分页面有交互原型链接，可直接点击体验','引用设计稿请注明出处'],
+            tech:['Figma','信息架构','交互原型','组件库','动效'],
+            cta:[{label:'打开 Figma 设计稿 ↗',href:'https://your-portfolio.com/coin/figma',primary:true},{label:'下载视觉规范 PDF',href:'https://your-portfolio.com/coin/visual-spec.pdf'}]
+          }
+        }
+      ]
+    },
+    {
+      cat:'Web 应用',
+      title:'Lumen 独立电商网站',
+      desc:'为设计师品牌打造的高转化率独立站，含完整购物流程与内容运营体系。',
+      overview:'Lumen 是为某独立设计师服装品牌从 0 搭建的 DTC 独立电商网站。项目重点解决品牌调性表达、购物流程转化、内容种草三个核心问题。上线后转化率较原第三方平台提升 2.3 倍，客单价提升 40%，并支撑品牌完成两轮融资期的营销活动。',
+      meta:[['担任角色','前端 + 体验'],['项目周期','2024.06 - 2024.12'],['转化提升','+230%'],['项目类型','DTC 电商']],
+      features:[
+        '品牌化首页设计，强内容叙事 + 视觉氛围',
+        '极速购物流程，结算转化路径优化至 3 步',
+        '商品图集 + AR 试穿 + 尺码助手，降低决策成本',
+        '会员体系与积分商城，复购率提升 35%',
+        'SEO 优化与结构化数据，自然流量增长 180%'
+      ],
+      tech:['Next.js','TypeScript','Tailwind CSS','Stripe','Sanity CMS','Vercel'],
+      actions:[
+        {
+          label:'访问在线商城',href:'https://lumen.your-portfolio.com',primary:true,type:'demo',
+          detail:{
+            title:'Lumen 独立电商 · 在线商城',
+            intro:'商城已上线运营，可浏览完整商品目录、加入购物车、走完结算流程（演示模式下不会真实下单），用于体验真实购物动线。',
+            sections:[
+              {h:'商城地址',p:'https://lumen.shop',code:true},
+              {h:'体验模式',p:'进入后会自动开启演示横幅，结算时使用测试支付，不会产生真实订单，可放心走完流程。'},
+              {h:'推荐体验路径',p:'① 首页 → 浏览设计师故事　② 进入商品详情 → 查看 AR 试穿　③ 加入购物车 → 走完结算（3 步）　④ 查看会员中心积分体系'},
+              {h:'性能数据',p:'首屏 LCP 1.2s、Lighthouse 96 分、Core Web Vitals 全绿，可在 DevTools Network 面板实测。'}
+            ],
+            tips:['演示模式下支付不会真实扣款，可放心体验','商品图片为真实授权素材，请勿商用转载','如需合作开店，可在商城底部「商务合作」联系'],
+            tech:['Next.js 14','Stripe','Sanity CMS','Vercel Edge','AR 试穿'],
+            cta:[{label:'前往商城 ↗',href:'https://lumen.your-portfolio.com',primary:true},{label:'了解建站方案',href:'#contact'}]
+          }
+        },
+        {
+          label:'查看技术方案',href:'https://docs.lumen.your-portfolio.com',type:'doc',
+          detail:{
+            title:'Lumen 电商 · 技术方案文档',
+            intro:'技术方案文档详细阐述了选型理由、架构设计、性能优化策略与上线后的指标表现，是电商独立站建设的技术参考。',
+            sections:[
+              {h:'文档结构',p:'共 6 章：技术选型 / 架构设计 / 性能优化 / 支付与安全 / SEO 策略 / 上线效果复盘'},
+              {h:'核心选型',p:'Next.js 14 App Router + Sanity CMS（头端分离）+ Stripe 支付 + Vercel Edge 部署，平衡开发效率、性能与成本。'},
+              {h:'性能策略',p:'图片 AVIF + 自适应、关键 CSS 内联、字体子集化、Edge Middleware 路由预取，多管齐下让首屏 LCP < 1.2s。'},
+              {h:'安全合规',p:'Stripe 托管支付（不触碰卡号）、PCI DSS 合规、用户数据加密存储、防爬虫与限流策略。'}
+            ],
+            tips:['文档含真实流量与转化数据，已脱敏','技术方案可作为同类项目的参考模板','如需一对一技术咨询，请联系我'],
+            tech:['Next.js 14','Stripe','Sanity CMS','Vercel Edge','Web Vitals'],
+            cta:[{label:'打开技术文档 ↗',href:'https://docs.lumen.your-portfolio.com',primary:true},{label:'预约技术咨询',href:'#contact'}]
+          }
+        }
+      ]
+    },
+    {
+      cat:'设计',
+      title:'Nebula 组件设计系统',
+      desc:'一套跨产品的设计语言与可复用组件库，统一多端体验并提升研发效率。',
+      overview:'Nebula 是为公司内部 4 条产品线统一搭建的设计系统。通过设计 Token、基础组件、业务模板三层架构，解决了多产品视觉不一致、重复造轮子的痛点。系统接入后，新功能交付效率提升 50%，设计走查问题下降 70%，已成为团队标准研发基座。',
+      meta:[['担任角色','设计系统负责人'],['项目周期','2023.05 - 持续维护'],['接入产品','4 条产品线'],['效率提升','+50%']],
+      features:[
+        '设计 Token 体系：颜色/字号/间距/动效全量化',
+        '60+ 基础组件，覆盖表单/反馈/导航/数据展示',
+        'Figma 变量与代码 Token 双向同步',
+        'Storybook 文档站，组件可交互预览',
+        '无障碍 a11y 规范与暗色模式原生支持'
+      ],
+      tech:['Figma','Storybook','React','Design Tokens','a11y','Style Dictionary'],
+      actions:[
+        {
+          label:'查看组件库',href:'https://nebula.your-portfolio.com/storybook',primary:true,type:'demo',
+          detail:{
+            title:'Nebula 组件库 · 在线 Storybook',
+            intro:'组件库已发布为 Storybook 文档站，可直接预览 60+ 组件的多种状态、API 与代码示例，是设计与研发协作的活文档。',
+            sections:[
+              {h:'Storybook 地址',p:'https://nebula.linmo.design/storybook',code:true},
+              {h:'可体验内容',p:'浏览 60+ 组件分类、查看每个组件的 Props 控制、切换暗色模式、查看 a11y 报告、复制代码片段。'},
+              {h:'组件分类',p:'基础元素 / 表单 / 反馈 / 导航 / 数据展示 / 业务模板，6 大类共 60+ 组件。'},
+              {h:'版本信息',p:'当前 v3.2.0，已接入 4 条产品线；按需引入 + Tree-shaking，包体积优化 40%。'}
+            ],
+            tips:['建议桌面端访问，移动端体验受限','部分组件有交互 demo，可直接操作验证','引用组件需遵循 MIT 协议并保留署名'],
+            tech:['React','TypeScript','Storybook','Style Dictionary','Chromatic'],
+            cta:[{label:'打开 Storybook ↗',href:'https://nebula.your-portfolio.com/storybook',primary:true},{label:'查看 NPM 包',href:'https://www.npmjs.com/package/your-nebula'}]
+          }
+        },
+        {
+          label:'查看设计规范',href:'https://docs.nebula.your-portfolio.com',type:'doc',
+          detail:{
+            title:'Nebula 设计规范 · 完整文档',
+            intro:'设计规范文档涵盖 Design Token 体系、组件视觉规范、暗色模式、无障碍标准与协作流程，是团队统一视觉的执行依据。',
+            sections:[
+              {h:'文档结构',p:'共 8 章：Token 体系 / 色彩规范 / 字体规范 / 间距规范 / 组件视觉规范 / 暗色模式 / 无障碍标准 / 协作流程'},
+              {h:'Token 体系',p:'共 200+ 个 Token，覆盖颜色/字号/间距/圆角/阴影/动效六大类，Figma Variables 与代码 Token 双向同步。'},
+              {h:'a11y 标准',p:'所有组件对比度符合 WCAG AA 标准，键盘可达、读屏友好，已通过 axe-core 自动化测试。'},
+              {h:'协作流程',p:'设计走查清单 + Chromatic 可视化回归，确保设计与研发交付零偏差。'}
+            ],
+            tips:['规范文档持续更新，建议收藏链接','含 Figma Tokens 文件可下载导入','如需团队培训，可联系我定制工作坊'],
+            tech:['Figma','Design Tokens','a11y','Style Dictionary','Chromatic'],
+            cta:[{label:'打开规范文档 ↗',href:'https://docs.nebula.your-portfolio.com',primary:true},{label:'下载 Figma Tokens 文件',href:'https://docs.nebula.your-portfolio.com/tokens.json'}]
+          }
+        }
+      ]
+    },
+    {
+      cat:'移动端',
+      title:'Flow 健身追踪 App',
+      desc:'结合 AI 教练的个性化健身计划与数据追踪应用，让训练更科学高效。',
+      overview:'Flow 是一款 AI 驱动的健身追踪应用，根据用户的体能水平、训练目标与恢复状态动态生成计划，并通过摄像头实时纠正动作。应用上线半年累计用户 12 万，用户平均周训练频次达 3.5 次，留存率行业领先。',
+      meta:[['担任角色','产品 + 前端'],['项目周期','2024.07 - 2025.01'],['用户规模','12 万+'],['项目类型','AI 健身']],
+      features:[
+        'AI 教练动态生成训练计划，自动调整强度',
+        '摄像头实时姿态识别，动作纠错准确率 92%',
+        '心率/配速/卡路里多维度训练数据追踪',
+        '社交打卡与挑战赛，提升训练粘性',
+        'Apple Health / Google Fit 数据互通'
+      ],
+      tech:['Flutter','Dart','TensorFlow Lite','HealthKit','Figma','AI 姿态识别'],
+      actions:[
+        {
+          label:'下载体验',href:'https://your-portfolio.com/flow/appstore',primary:true,type:'download',
+          detail:{
+            title:'Flow 健身追踪 App · 下载信息',
+            intro:'Flow 已上架 App Store 与 Google Play，含 7 天免费试用，AI 教练功能需订阅解锁，基础训练追踪永久免费。',
+            sections:[
+              {h:'App Store',p:'搜索「Flow 健身」即可找到，或扫描下方二维码直达。'},
+              {h:'Google Play',p:'已上架 Google Play，搜索「Flow Fitness」即可，部分国家地区暂不可用。'},
+              {h:'版本信息',p:'当前版本 v1.8.0　|　大小 52 MB　|　兼容 iOS 14+ / Android 9+　|　语言：中英日韩四语'},
+              {h:'付费策略',p:'基础训练追踪免费；AI 教练订阅 ¥28/月或 ¥248/年，含个性化计划、姿态识别、数据分析。'}
+            ],
+            tips:['首次启动会做体能评估，建议如实填写','AI 姿态识别需要摄像头权限，仅本地处理','如需企业版（团队健身计划），请联系我'],
+            tech:['Flutter','Dart','TensorFlow Lite','HealthKit','AI 姿态识别'],
+            cta:[{label:'前往 App Store ↗',href:'https://your-portfolio.com/flow/appstore',primary:true},{label:'查看 Google Play',href:'https://your-portfolio.com/flow/googleplay'}]
+          }
+        },
+        {
+          label:'查看项目复盘',href:'https://docs.flow.your-portfolio.com/review',type:'doc',
+          detail:{
+            title:'Flow 健身 App · 项目复盘文档',
+            intro:'项目复盘文档完整记录了从立项到上线 7 个月的关键决策、踩坑经验与数据复盘，是 AI + 健身赛道的实战参考。',
+            sections:[
+              {h:'复盘结构',p:'共 7 章：立项背景 / 用户调研 / 产品决策 / AI 方案选型 / 开发踩坑 / 上线增长 / 经验沉淀'},
+              {h:'关键决策',p:'为什么选 Flutter 而非 RN、AI 姿态识别为什么用本地推理而非云端、订阅策略为什么定 ¥28/月——每个决策都有数据支撑。'},
+              {h:'踩坑经验',p:'AI 模型在低端机性能瓶颈、HealthKit 数据同步冲突、订阅转化漏斗优化——共 12 个真实踩坑案例。'},
+              {h:'数据复盘',p:'上线半年累计 12 万用户、周训练频次 3.5 次、7 日留存 48%、订阅转化 8.4%，含详细增长曲线。'}
+            ],
+            tips:['复盘含真实用户与收入数据，已脱敏','可作为 AI 应用落地的参考案例','如需深度交流，可预约 1v1 复盘分享'],
+            tech:['Flutter','TensorFlow Lite','HealthKit','增长复盘','AI 落地'],
+            cta:[{label:'打开复盘文档 ↗',href:'https://docs.flow.your-portfolio.com/review',primary:true},{label:'预约 1v1 复盘分享',href:'#contact'}]
+          }
+        }
+      ]
+    }
+  ];
+
+  const modal = document.getElementById('workModal');
+  const modalImg = document.getElementById('modalImg');
+  const modalCat = document.getElementById('modalCat');
+  const modalTitle = document.getElementById('modalTitle');
+  const modalDesc = document.getElementById('modalDesc');
+  const modalMeta = document.getElementById('modalMeta');
+  const modalOverview = document.getElementById('modalOverview');
+  const modalFeatures = document.getElementById('modalFeatures');
+  const modalTech = document.getElementById('modalTech');
+  const modalActions = document.getElementById('modalActions');
+
+  function openModal(index){
+    const data = worksData[index];
+    if(!data) return;
+    const card = workCards[index];
+    const img = card.querySelector('.work-img img');
+    modalImg.src = img ? img.src : '';
+    modalImg.alt = data.title;
+    modalCat.textContent = data.cat;
+    modalTitle.textContent = data.title;
+    modalDesc.textContent = data.desc;
+    modalMeta.innerHTML = data.meta.map(([k,v])=>
+      `<div class="meta-item"><span class="meta-lbl">${k}</span><span class="meta-val">${v}</span></div>`
+    ).join('');
+    modalOverview.textContent = data.overview;
+    modalFeatures.innerHTML = data.features.map(f=>`<li>${f}</li>`).join('');
+    modalTech.innerHTML = data.tech.map(t=>`<span class="tag">${t}</span>`).join('');
+    // 渲染操作按钮：有 detail 的走内嵌详情视图，无 detail 的直接跳 href
+    modalActions.innerHTML = data.actions.map((a,i)=>{
+      const cls = a.primary ? 'btn-primary' : 'btn-ghost';
+      const hasDetail = !!a.detail;
+      const attrs = hasDetail
+        ? `data-action-idx="${i}" role="button" tabindex="0"`
+        : `href="${a.href}" target="_blank" rel="noopener"`;
+      return `<a class="${cls}" ${attrs}>${a.label}</a>`;
+    }).join('');
+    // 绑定按钮事件：有 detail 的点击切换到详情视图
+    modalActions.querySelectorAll('[data-action-idx]').forEach(btn=>{
+      const idx = parseInt(btn.dataset.actionIdx,10);
+      btn.addEventListener('click',e=>{ e.preventDefault(); openActionDetail(data.actions[idx]); });
+      btn.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openActionDetail(data.actions[idx]); }
+      });
+    });
+    // 默认显示主视图
+    showMainView();
+    modal.classList.add('open');
+    document.body.classList.add('no-scroll');
+    modal.querySelector('.modal').scrollTop = 0;
+  }
+
+  // ===== Action detail view =====
+  const mainView = document.getElementById('modalMainView');
+  const actionView = document.getElementById('modalActionView');
+  const actionBack = document.getElementById('actionBack');
+  const actionTypePill = document.getElementById('actionTypePill');
+  const actionTitle = document.getElementById('actionTitle');
+  const actionIntro = document.getElementById('actionIntro');
+  const actionSections = document.getElementById('actionSections');
+  const actionTips = document.getElementById('actionTips');
+  const actionTech = document.getElementById('actionTech');
+  const actionCtaRow = document.getElementById('actionCtaRow');
+
+  const typeMeta = {
+    demo:{label:'🌐 在线 Demo',cls:'demo'},
+    doc:{label:'📄 案例文档',cls:'doc'},
+    download:{label:'⬇ 下载资源',cls:'download'}
+  };
+
+  function showMainView(){
+    mainView.classList.add('active');
+    actionView.classList.remove('active');
+    modal.querySelector('.modal').scrollTop = 0;
+  }
+  function openActionDetail(action){
+    if(!action || !action.detail) return;
+    const tm = typeMeta[action.type] || {label:'ℹ 详情',cls:'doc'};
+    actionTypePill.className = 'action-type-pill ' + tm.cls;
+    actionTypePill.textContent = tm.label;
+    actionTitle.textContent = action.detail.title;
+    actionIntro.textContent = action.detail.intro;
+    actionSections.innerHTML = action.detail.sections.map(s=>
+      `<div class="action-section">
+        <h5>${s.h}</h5>
+        <p>${s.code ? `<span class="code-like">${s.p}</span>` : s.p}</p>
+      </div>`
+    ).join('');
+    actionTips.innerHTML = action.detail.tips.map(t=>`<li>${t}</li>`).join('');
+    actionTech.innerHTML = action.detail.tech.map(t=>`<span class="tag">${t}</span>`).join('');
+    actionCtaRow.innerHTML = action.detail.cta.map(c=>
+      `<a href="${c.href}" class="${c.primary?'primary':'ghost'}" target="_blank" rel="noopener">${c.label}</a>`
+    ).join('');
+    mainView.classList.remove('active');
+    actionView.classList.add('active');
+    modal.querySelector('.modal').scrollTop = 0;
+  }
+  actionBack.addEventListener('click',showMainView);
+  actionBack.addEventListener('keydown',e=>{
+    if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showMainView(); }
+  });
+  function closeModal(){
+    modal.classList.remove('open');
+    document.body.classList.remove('no-scroll');
+  }
+
+  // 点击卡片打开详情
+  workCards.forEach((card,i)=>{
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label',`查看 ${worksData[i].title} 详情`);
+    card.addEventListener('click',()=>openModal(i));
+    card.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openModal(i); }
+    });
+  });
+
+  // 关闭交互：按钮 / 点击遮罩 / ESC
+  document.getElementById('modalClose').addEventListener('click',closeModal);
+  modal.addEventListener('click',e=>{ if(e.target===modal) closeModal(); });
+
+  // ===== Skill detail modal =====
+  const skillData = [
+    {
+      cat:'Frontend',
+      title:'前端开发',
+      emoji:'💻',
+      bannerClass:'b1',
+      desc:'构建响应式、高性能、可维护的现代 Web 应用界面，从交互细节到工程架构全面把控。',
+      level:95,
+      spec:[['从业经验','5+ 年'],['交付项目','40+'],['性能优化','Lighthouse 95+'],['代码测试','覆盖率 80%+']],
+      overview:'深耕前端工程化与用户体验，擅长把复杂业务拆解为清晰可维护的组件化架构。日常关注 Web 性能、可访问性与设计系统建设，能在「快速迭代」与「长期可维护」之间找到平衡，让产品既好看又好用。',
+      points:[
+        '组件化与状态管理：React / Vue 双栈，熟悉 Hooks、Composition API、状态机模式',
+        '性能优化：首屏加载、运行时卡顿、长列表虚拟化、图片/字体按需加载',
+        '工程化：Webpack / Vite 构建调优，Monorepo + CI 流水线，自动化测试',
+        '响应式与无障碍：移动优先布局，a11y 规范，键盘/读屏友好',
+        '动效与交互：CSS / Framer Motion 实现流畅且有意义的微交互'
+      ],
+      tech:['React 18','Vue 3','TypeScript','Next.js','Tailwind CSS','Vite','Framer Motion','Jest'],
+      cases:[
+        {
+          title:'拖拽式看板与 20+ 图表组件库',
+          project:'Pulse 数据分析平台',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20SaaS%20analytics%20dashboard%20UI%20design%2C%20dark%20theme%2C%20purple%20and%20cyan%20accent%20colors%2C%20charts%20and%20data%20visualization%2C%20clean%20minimal%20interface%2C%20professional%20product%20screenshot&image_size=landscape_16_9',
+          desc:'主导 Pulse 平台前端架构与可视化看板体系搭建，从 0 设计一套可拖拽组合的数据看板与 20+ 种图表组件。',
+          meta:[['担任角色','前端主创'],['项目周期','2024.03 - 2024.11'],['团队规模','4 人前端'],['交付物','看板 + 组件库']],
+          work:[
+            '设计组件化架构，按"原子-分子-组件"三层抽象组织代码',
+            '实现拖拽式看板编辑器，支持组件拖入、缩放、对齐、分组',
+            '基于 D3.js 封装 20+ 种业务图表（柱/线/饼/漏斗/桑基等）',
+            '搭建 Monorepo + 通用组件库，沉淀给其他项目复用',
+            '引入 Storybook 文档站，组件可交互预览与走查'
+          ],
+          highlights:[
+            '虚拟列表 + Canvas 渲染让万级数据点看板保持 60fps',
+            '拖拽引擎自研，支持磁吸对齐、撤销重做、批量选择',
+            '设计 Token 驱动主题切换，暗色/亮色/品牌色一键切换'
+          ],
+          results:[['图表组件','20+ 种'],['渲染帧率','60 fps'],['复用产品线','4 条'],['文档覆盖','100%']],
+          tech:['React 18','TypeScript','D3.js','Vite','Storybook','Zustand']
+        },
+        {
+          title:'60+ 基础组件的设计系统落地',
+          project:'Nebula 组件设计系统',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Beautiful%20design%20system%20component%20library%20showcase%2C%20UI%20kit%2C%20buttons%20cards%20forms%2C%20consistent%20design%20tokens%2C%20purple%20cyan%20palette%2C%20modern%20interface%20elements%2C%20professional%20presentation&image_size=landscape_16_9',
+          desc:'主导 Nebula 设计系统的前端工程化落地，把 60+ 设计组件做成可复用、可测、可文档化的代码资产。',
+          meta:[['担任角色','前端负责人'],['项目周期','2023.05 - 持续维护'],['接入产品','4 条'],['组件数','60+']],
+          work:[
+            '搭建组件库工程脚手架，统一构建、测试、发布流程',
+            '封装 60+ 基础组件，覆盖表单/反馈/导航/数据展示',
+            '建立 Design Token → CSS 变量 → 组件 props 的双向通道',
+            '编写单元测试与可视化回归测试，覆盖率 80%+',
+            '提供按需引入与 Tree-shaking，包体积优化 40%'
+          ],
+          highlights:[
+            'Figma 变量与代码 Token 自动同步，设计与研发零偏差',
+            'Chromatic 可视化回归，杜绝样式意外回归',
+            '组件 API 设计遵循 a11y 与受控/非受控双模式'
+          ],
+          results:[['组件总数','60+'],['测试覆盖','80%+'],['接入产品','4 条'],['包体积','-40%']],
+          tech:['React','TypeScript','Vite','Style Dictionary','Chromatic','Jest']
+        },
+        {
+          title:'首屏 LCP < 1.2s 的极致性能优化',
+          project:'Lumen 独立电商网站',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20e-commerce%20website%20homepage%20design%2C%20fashion%20store%2C%20elegant%20product%20grid%2C%20clean%20minimal%20layout%2C%20soft%20neutral%20colors%2C%20professional%20web%20design%20screenshot&image_size=landscape_16_9',
+          desc:'主导 Lumen 电商独立站前端架构与性能优化，在保证视觉氛围的前提下把首屏 LCP 压到 1.2s 以内。',
+          meta:[['担任角色','前端主创'],['项目周期','2024.06 - 2024.12'],['转化提升','+230%'],['首屏 LCP','< 1.2s']],
+          work:[
+            '基于 Next.js App Router 搭建，SSR + ISR 混合渲染',
+            '图片自适应 + next/image + AVIF 格式，体积降 65%',
+            '关键 CSS 内联 + 字体子集化，首屏渲染阻塞清零',
+            '路由预取 + Edge Middleware，页面切换 < 200ms',
+            '搭建性能监控埋点，线上 LCP / CLS / INP 持续追踪'
+          ],
+          highlights:[
+            'Lighthouse 性能分稳定 95+，移动端 4G 网络下首屏 < 1.5s',
+            'Core Web Vitals 全绿，搜索排名与流量双提升',
+            '组件级 Suspense 流式渲染，首字节时间降 40%'
+          ],
+          results:[['首屏 LCP','1.2s'],['Lighthouse','95+'],['转化率','+230%'],['自然流量','+180%']],
+          tech:['Next.js 14','TypeScript','Tailwind CSS','Vercel Edge','Sanity CMS']
+        }
+      ]
+    },
+    {
+      cat:'Backend',
+      title:'后端 & 数据',
+      emoji:'⚙️',
+      bannerClass:'b2',
+      desc:'设计稳定的 API 与数据架构，支撑业务增长，兼顾性能、安全与可扩展性。',
+      level:85,
+      spec:[['API 设计','REST + GraphQL'],['数据规模','日均 200万+ 事件'],['响应延迟','P99 < 80ms'],['可用性','99.9%']],
+      overview:'从接口设计到数据建模，覆盖服务端全链路。注重领域建模与接口契约，擅长用合理的抽象应对业务复杂度，同时在性能、容错、安全之间做出务实权衡，让后端真正支撑业务而不是拖累业务。',
+      points:[
+        '服务端框架：Node.js (Nest.js) 与 Python (FastAPI) 双栈，RESTful / GraphQL 接口设计',
+        '数据存储：PostgreSQL 关系建模、Redis 缓存策略、Elasticsearch 全文检索',
+        '实时通信：WebSocket / SSE 推送，消息队列异步解耦',
+        '安全与权限：JWT / OAuth2、RBAC 细粒度授权、输入校验与限流',
+        '可观测性：结构化日志、链路追踪、指标监控与告警体系'
+      ],
+      tech:['Node.js','Nest.js','Python','FastAPI','PostgreSQL','Redis','GraphQL','RabbitMQ'],
+      cases:[
+        {
+          title:'实时数据接入与秒级指标计算',
+          project:'Pulse 数据分析平台',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20SaaS%20analytics%20dashboard%20UI%20design%2C%20dark%20theme%2C%20purple%20and%20cyan%20accent%20colors%2C%20charts%20and%20data%20visualization%2C%20clean%20minimal%20interface%2C%20professional%20product%20screenshot&image_size=landscape_16_9',
+          desc:'主导 Pulse 平台服务端数据链路，构建从多源接入、实时计算到秒级推送的完整后端体系。',
+          meta:[['担任角色','后端主创'],['日均事件','200万+'],['P99 延迟','< 80ms'],['可用性','99.9%']],
+          work:[
+            '设计统一数据接入网关，对接 12+ 主流数据源（MySQL/Stripe/GA4 等）',
+            '基于 Kafka + Flink 构建实时计算管线，秒级聚合业务指标',
+            'WebSocket 推送通道，看板指标变更秒级触达前端',
+            '冷热数据分层：热数据 Redis、温数据 PG、冷数据 S3',
+            '搭建细粒度 RBAC 权限体系，团队/项目/看板三级授权'
+          ],
+          highlights:[
+            '12 个数据源抽象为统一接入协议，新增源 < 1 天',
+            'Flink 窗口聚合 + RocksDB 状态后端，秒级延迟稳定',
+            '智能异常检测：基于 3-sigma + 趋势拟合，误报率 < 5%'
+          ],
+          results:[['日均事件','200万+'],['P99 延迟','80ms'],['数据源','12+'],['可用性','99.9%']],
+          tech:['Node.js','Nest.js','Kafka','Flink','PostgreSQL','Redis','WebSocket']
+        },
+        {
+          title:'端到端加密同步服务',
+          project:'Coin 记账 App',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20mobile%20app%20UI%20design%20mockup%2C%20finance%20and%20budgeting%20app%2C%20clean%20interface%2C%20soft%20gradient%20background%2C%20card%20based%20layout%2C%20professional%20product%20screenshot%2C%20smartphone%20screen&image_size=landscape_16_9',
+          desc:'为 Coin 记账 App 设计并实现端到端加密的多设备同步服务，保障用户隐私的同时做到秒级同步。',
+          meta:[['担任角色','后端 + 安全'],['用户规模','5 万+ MAU'],['同步延迟','< 1s'],['加密方式','E2EE']],
+          work:[
+            '设计 E2EE 同步协议：客户端生成密钥，服务端只存密文',
+            '基于 CRDT 实现多端冲突合并，离线编辑可无缝合并',
+            '推送同步增量变更，带宽消耗降 80%',
+            '密钥恢复流程：基于 Shamir 门限方案，安全且可恢复',
+            '搭建同步一致性巡检任务，自动修复异常数据'
+          ],
+          highlights:[
+            '服务端零明文，即使数据库泄露也无法读取用户数据',
+            'CRDT 合并算法保证多端编辑最终一致，无冲突',
+            '增量推送协议让同步流量降 80%，弱网也能秒同步'
+          ],
+          results:[['用户规模','5 万+'],['同步延迟','< 1s'],['带宽节省','80%'],['安全等级','E2EE']],
+          tech:['Node.js','FastAPI','PostgreSQL','CRDT','AES-GCM','WebSocket']
+        },
+        {
+          title:'统一鉴权与权限网关',
+          project:'多个内部中台',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20enterprise%20admin%20dashboard%20UI%2C%20security%20and%20access%20control%20panel%2C%20role%20management%20interface%2C%20dark%20theme%2C%20purple%20cyan%20accent%2C%20clean%20professional%20screenshot&image_size=landscape_16_9',
+          desc:'为公司内部多个中台系统搭建统一鉴权网关，一套账号体系打通所有内部应用。',
+          meta:[['担任角色','后端主创'],['接入系统','8+'],['鉴权方式','OAuth2 + OIDC'],['日均请求','500万+']],
+          work:[
+            '设计统一身份服务，提供 OAuth2 / OIDC / SAML 三种协议',
+            '搭建 API 网关，统一鉴权、限流、审计日志',
+            '实现细粒度 ABAC 权限模型，支持属性级授权',
+            'SSO 单点登录 + 一键登出，覆盖 Web/移动/CLI 全端',
+            '审计日志全链路追踪，操作可追溯到具体人与设备'
+          ],
+          highlights:[
+            '一次登录通所有内部系统，研发效率提升明显',
+            '网关层统一限流与熔断，保护后端服务免受流量冲击',
+            'ABAC 模型支持"部门 + 角色 + 资源属性"组合授权'
+          ],
+          results:[['接入系统','8+'],['日均请求','500万+'],['登录耗时','-70%'],['零安全事故','✓']],
+          tech:['Node.js','Nest.js','OAuth2','OIDC','PostgreSQL','Redis','Nginx']
+        }
+      ]
+    },
+    {
+      cat:'Design',
+      title:'设计 & 体验',
+      emoji:'🎨',
+      bannerClass:'b3',
+      desc:'从用户研究到视觉呈现，输出一致的设计语言，让产品既专业又有温度。',
+      level:90,
+      spec:[['设计年限','6+ 年'],['设计系统','2 套主导'],['用户研究','可用性测试'],['交付物','手册 + 组件库']],
+      overview:'设计背景让我能在产品早期就介入体验决策，而不只是「最后画一稿」。擅长把模糊需求转化为清晰的信息结构与视觉系统，并推动设计落地——从原型到组件库再到走查，确保最终上线版本与设计意图一致。',
+      points:[
+        '产品交互：信息架构、用户旅程、低保真原型与可用性测试',
+        '视觉系统：色彩 / 字体 / 间距 token 化，建立可复用设计语言',
+        '设计系统：Figma 变量 + 组件库，与代码 Token 双向同步',
+        '动效设计：转场、反馈、引导类微动效，提升体验质感',
+        '协作落地：设计走查清单、a11y 自检、与研发共建组件库'
+      ],
+      tech:['Figma','Framer','Illustrator','Design Tokens','Storybook','原型','动效','a11y'],
+      cases:[
+        {
+          title:'48 页品牌手册 + 60+ 素材',
+          project:'Aurora 品牌视觉系统',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Elegant%20brand%20identity%20design%20mockup%2C%20minimalist%20logo%20and%20stationery%2C%20soft%20gradient%20colors%2C%20modern%20typography%2C%20creative%20design%20portfolio%20piece%2C%20professional%20presentation&image_size=landscape_16_9',
+          desc:'主导 Aurora 品牌从命名到完整视觉识别系统的设计落地，输出可执行的品牌规范与素材包。',
+          meta:[['担任角色','品牌主设计'],['项目周期','2023.09 - 2024.02'],['交付物','手册 + 素材包'],['应用场景','10+']],
+          work:[
+            '主导品牌定位与命名，提炼"光与流动"的核心概念',
+            '设计主标识 + 3 套延展符号系统，覆盖多场景应用',
+            '制定 6 色主辅色板与 2 套字体组合规范',
+            '输出 48 页品牌手册，覆盖印刷/数字/空间三大场景',
+            '交付 60+ 可复用素材（Logo/图标/模板/PPT 等）'
+          ],
+          highlights:[
+            '品牌手册建立完整使用规范，杜绝后续应用走样',
+            '符号系统可灵活延展，应对不同场景与媒介',
+            '素材包让非设计同事也能产出符合品牌调性的内容'
+          ],
+          results:[['品牌手册','48 页'],['素材数量','60+'],['应用场景','10+'],['复用团队','全公司']],
+          tech:['Figma','Illustrator','Photoshop','品牌策略','VI 规范','印刷工艺']
+        },
+        {
+          title:'4 条产品线统一视觉语言',
+          project:'Nebula 组件设计系统',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Beautiful%20design%20system%20component%20library%20showcase%2C%20UI%20kit%2C%20buttons%20cards%20forms%2C%20consistent%20design%20tokens%2C%20purple%20cyan%20palette%2C%20modern%20interface%20elements%2C%20professional%20presentation&image_size=landscape_16_9',
+          desc:'主导 Nebula 设计系统的视觉层面，建立 Token 化的设计语言并打通到代码层。',
+          meta:[['担任角色','设计系统负责人'],['接入产品','4 条'],['Token 数','200+'],['走查问题','-70%']],
+          work:[
+            '建立 Design Token 体系：颜色/字号/间距/动效全量化',
+            '在 Figma 中用 Variables 管理 Token，与代码双向同步',
+            '设计 60+ 基础组件的视觉规范与多状态变体',
+            '制定暗色模式与无障碍对比度规范',
+            '建立设计走查清单，与研发协作落地组件库'
+          ],
+          highlights:[
+            'Figma Variables 与代码 Token 自动同步，零人工搬运',
+            '暗色模式基于 Token 反转，无需逐组件调整',
+            'a11y 对比度全部达标，覆盖视觉障碍用户'
+          ],
+          results:[['接入产品','4 条'],['Token 数','200+'],['走查问题','-70%'],['交付效率','+50%']],
+          tech:['Figma','Variables','Design Tokens','Storybook','a11y','Style Dictionary']
+        },
+        {
+          title:'移动端完整交互与视觉',
+          project:'Coin / Flow App',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20mobile%20app%20UI%20design%20mockup%2C%20finance%20and%20budgeting%20app%2C%20clean%20interface%2C%20soft%20gradient%20background%2C%20card%20based%20layout%2C%20professional%20product%20screenshot%2C%20smartphone%20screen&image_size=landscape_16_9',
+          desc:'主导 Coin 与 Flow 两款移动 App 的完整交互与视觉设计，从用户旅程到上线走查全程负责。',
+          meta:[['担任角色','产品 + 设计'],['项目数','2 款 App'],['用户规模','17 万+'],['App Store','4.8 分']],
+          work:[
+            '主导 Coin 记账的交互流程，把单笔记账压缩到 3 秒',
+            '主导 Flow 健身 App 视觉风格，建立活力品牌调性',
+            '设计完整组件库，覆盖表单/列表/卡片/图表等',
+            '动效设计：转场、反馈、引导类微交互全套',
+            '可用性测试 + 走查，确保上线版本与设计一致'
+          ],
+          highlights:[
+            'Coin 记账 3 秒流程让月活留存提升 35%',
+            'Flow 视觉风格在同类健身 App 中辨识度极高',
+            '动效设计提升操作反馈质感，用户好评率 +40%'
+          ],
+          results:[['用户规模','17 万+'],['App Store','4.8'],['留存提升','+35%'],['好评率','+40%']],
+          tech:['Figma','Framer','Principle','原型','动效','可用性测试']
+        }
+      ]
+    },
+    {
+      cat:'DevOps',
+      title:'工程 & 部署',
+      emoji:'☁️',
+      bannerClass:'b4',
+      desc:'自动化流水线与云原生实践，保障稳定交付，让上线变成一件平淡的事。',
+      level:82,
+      spec:[['部署频率','日均 10+ 次'],['流水线','全自动化'],['回滚耗时','< 3 分钟'],['服务可用','99.9%']],
+      overview:'把「能跑起来」推进到「能稳定、能回滚、能观测」。熟悉容器化与云原生实践，擅长用 CI/CD 把重复工作自动化，把风险点前置到流水线里拦截，让团队能放心地频繁发布。',
+      points:[
+        '容器化：Docker 镜像分层优化，docker-compose 本地编排',
+        'CI/CD：GitHub Actions / GitLab CI 流水线，自动化测试与多环境发布',
+        '云服务：AWS (EC2/S3/RDS) 与 Vercel 边缘部署，成本与性能平衡',
+        '反向代理与网关：Nginx 配置、HTTPS、负载均衡与缓存策略',
+        '监控运维：日志聚合、健康检查、灰度发布与一键回滚'
+      ],
+      tech:['Docker','GitHub Actions','AWS','Vercel','Nginx','Linux','Cloudflare','Grafana'],
+      cases:[
+        {
+          title:'蓝绿部署 + 自动回滚体系',
+          project:'Pulse 数据分析平台',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20devops%20deployment%20dashboard%2C%20CI%20CD%20pipeline%20visualization%2C%20blue%20green%20deployment%2C%20monitoring%20graphs%2C%20dark%20theme%2C%20purple%20cyan%20accent%2C%20professional%20screenshot&image_size=landscape_16_9',
+          desc:'为 Pulse 平台搭建蓝绿部署与自动回滚体系，让发布变成一件低风险、可逆的事。',
+          meta:[['担任角色','DevOps 主创'],['部署频率','日均 10+'],['回滚耗时','< 3 分钟'],['可用性','99.9%']],
+          work:[
+            '搭建 Docker 镜像分层构建，镜像体积降 60%',
+            '设计蓝绿部署流程，新版本灰度切流可控',
+            '健康检查 + 指标门禁，异常自动触发回滚',
+            '搭建 Grafana 监控大盘，关键指标实时可见',
+            '日志聚合 + 链路追踪，问题定位从小时到分钟'
+          ],
+          highlights:[
+            '发布窗口从每周一次提升到日均 10+ 次',
+            '自动回滚成功率 100%，故障平均恢复 < 3 分钟',
+            '镜像分层 + 缓存让构建时间从 8 分钟降到 90 秒'
+          ],
+          results:[['部署频率','10+/日'],['回滚耗时','< 3min'],['构建耗时','-80%'],['可用性','99.9%']],
+          tech:['Docker','GitHub Actions','AWS','Nginx','Grafana','Loki']
+        },
+        {
+          title:'边缘部署 + 全球 CDN 加速',
+          project:'Lumen 独立电商网站',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20e-commerce%20website%20homepage%20design%2C%20fashion%20store%2C%20elegant%20product%20grid%2C%20clean%20minimal%20layout%2C%20soft%20neutral%20colors%2C%20professional%20web%20design%20screenshot&image_size=landscape_16_9',
+          desc:'为 Lumen 电商独立站设计全球边缘部署方案，让海外用户也能享受秒开体验。',
+          meta:[['担任角色','DevOps + 前端'],['首屏 LCP','< 1.2s'],['CDN 命中','95%+'],['全球覆盖','5 大区']],
+          work:[
+            '基于 Vercel Edge 部署，静态资源全球边缘缓存',
+            'Cloudflare CDN + 图片智能压缩，体积降 65%',
+            'Edge Middleware 实现地理路由与 A/B 测试',
+            '搭建多区域健康监控，单区域故障自动切换',
+            '缓存策略精细化：HTML 短缓存、静态资源长缓存'
+          ],
+          highlights:[
+            '全球 5 大区边缘节点，海外首屏 LCP < 1.5s',
+            'CDN 命中率 95%+，源站压力降 90%',
+            'Edge Middleware 让 A/B 测试无需发版'
+          ],
+          results:[['首屏 LCP','1.2s'],['CDN 命中','95%+'],['全球区域','5'],['源站压力','-90%']],
+          tech:['Vercel Edge','Cloudflare','Next.js','CDN','Edge Middleware']
+        },
+        {
+          title:'统一 CI 模板，发布效率 +60%',
+          project:'多项目通用',
+          img:'https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=Modern%20devops%20automation%20pipeline%2C%20CI%20CD%20workflow%20diagram%2C%20automated%20testing%20and%20deployment%2C%20dark%20theme%2C%20purple%20cyan%20accent%2C%20professional%20infographic%20screenshot&image_size=landscape_16_9',
+          desc:'为公司多个项目沉淀统一的 CI/CD 模板，让新项目接入发布流程只需配置而非重写。',
+          meta:[['担任角色','DevOps 负责人'],['接入项目','8+'],['发布效率','+60%'],['事故率','-50%']],
+          work:[
+            '抽象统一 CI 模板：构建/测试/扫描/发布四阶段',
+            '封装通用 Action 组件，新项目接入只需声明配置',
+            '集成代码扫描 + 依赖漏洞检查，问题前置拦截',
+            '多环境配置管理：dev/staging/prod 一键切换',
+            '发布机器人自动通知，关键节点全员可见'
+          ],
+          highlights:[
+            '新项目接入 CI 从 2 天降到 30 分钟',
+            '统一质量门禁，生产事故率下降 50%',
+            '可复用模板让团队规范自然落地，无需文档说教'
+          ],
+          results:[['接入项目','8+'],['发布效率','+60%'],['接入耗时','-93%'],['事故率','-50%']],
+          tech:['GitHub Actions','Docker','Helm','Terraform','Slack Bot']
+        }
+      ]
+    }
+  ];
+
+  const skillModal = document.getElementById('skillModal');
+  const skillBanner = document.getElementById('skillBanner');
+  const skillEmoji = document.getElementById('skillEmoji');
+  const skillCat = document.getElementById('skillCat');
+  const skillModalTitle = document.getElementById('skillModalTitle');
+  const skillDesc = document.getElementById('skillDesc');
+  const skillLevelFill = document.getElementById('skillLevelFill');
+  const skillLevelNum = document.getElementById('skillLevelNum');
+  const skillSpec = document.getElementById('skillSpec');
+  const skillOverview = document.getElementById('skillOverview');
+  const skillPoints = document.getElementById('skillPoints');
+  const skillTech = document.getElementById('skillTech');
+  const skillCases = document.getElementById('skillCases');
+  const skillCards = document.querySelectorAll('.skill-card');
+
+  function openSkillModal(index){
+    const d = skillData[index];
+    if(!d) return;
+    skillBanner.className = 'skill-banner ' + d.bannerClass;
+    skillEmoji.textContent = d.emoji;
+    skillCat.textContent = d.cat;
+    skillModalTitle.textContent = d.title;
+    skillDesc.textContent = d.desc;
+    skillLevelFill.style.width = '0%';
+    skillLevelNum.textContent = d.level + '%';
+    skillSpec.innerHTML = d.spec.map(([k,v])=>
+      `<div class="skill-spec-item"><span class="chk">✦</span><span><span style="color:var(--muted)">${k}</span>　${v}</span></div>`
+    ).join('');
+    skillOverview.textContent = d.overview;
+    skillPoints.innerHTML = d.points.map(p=>`<li>${p}</li>`).join('');
+    skillTech.innerHTML = d.tech.map(t=>`<span class="tag">${t}</span>`).join('');
+    // 渲染代表性实践列表（可点击）
+    skillCases.innerHTML = d.cases.map((c,i)=>
+      `<li class="case-item" data-case="${i}" tabindex="0" role="button" aria-label="查看案例 ${c.title} 详情">
+        <span class="case-bullet">▸</span>
+        <span class="case-title">${c.title}</span>
+        <span class="case-project">${c.project}</span>
+        <span class="case-cta">查看详情 →</span>
+      </li>`
+    ).join('');
+    // 绑定点击 / 键盘事件
+    skillCases.querySelectorAll('.case-item').forEach((el,i)=>{
+      el.addEventListener('click',()=>openCaseModal(d.cases[i],d.title));
+      el.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openCaseModal(d.cases[i],d.title); }
+      });
+    });
+    skillModal.classList.add('open');
+    document.body.classList.add('no-scroll');
+    skillModal.querySelector('.modal').scrollTop = 0;
+    // 进场后再填充进度条宽度，触发过渡动画
+    requestAnimationFrame(()=>{ requestAnimationFrame(()=>{ skillLevelFill.style.width = d.level + '%'; }); });
+  }
+  function closeSkillModal(){
+    skillModal.classList.remove('open');
+    // 若案例弹窗还开着，关闭它并恢复滚动锁
+    const cm = document.getElementById('caseModal');
+    if(cm.classList.contains('open')){
+      cm.classList.remove('open');
+    }
+    document.body.classList.remove('no-scroll');
+  }
+
+  // ===== Case detail modal =====
+  const caseModal = document.getElementById('caseModal');
+  function openCaseModal(c,skillName){
+    document.getElementById('caseImg').src = c.img;
+    document.getElementById('caseImg').alt = c.title;
+    document.getElementById('caseSkillCat').textContent = skillName ? `代表性实践 · ${skillName}` : '代表性实践';
+    document.getElementById('caseModalTitle').textContent = c.title;
+    document.getElementById('caseDesc').textContent = c.desc;
+    document.getElementById('caseMeta').innerHTML = c.meta.map(([k,v])=>
+      `<div class="meta-item"><span class="meta-lbl">${k}</span><span class="meta-val">${v}</span></div>`
+    ).join('');
+    document.getElementById('caseWork').innerHTML = c.work.map(w=>`<li>${w}</li>`).join('');
+    document.getElementById('caseHighlights').innerHTML = c.highlights.map(h=>`<li>${h}</li>`).join('');
+    document.getElementById('caseResults').innerHTML = c.results.map(([k,v])=>
+      `<div class="case-result-card"><div class="case-result-val">${v}</div><div class="case-result-lbl">${k}</div></div>`
+    ).join('');
+    document.getElementById('caseTech').innerHTML = c.tech.map(t=>`<span class="tag">${t}</span>`).join('');
+    caseModal.classList.add('open');
+    document.body.classList.add('no-scroll');
+    caseModal.querySelector('.modal').scrollTop = 0;
+  }
+  function closeCaseModal(){
+    caseModal.classList.remove('open');
+    // 关闭案例弹窗后回到技能弹窗，保持 body 滚动锁（技能弹窗仍开着）
+    if(!skillModal.classList.contains('open')){
+      document.body.classList.remove('no-scroll');
+    }
+  }
+
+  document.getElementById('caseModalClose').addEventListener('click',closeCaseModal);
+  caseModal.addEventListener('click',e=>{ if(e.target===caseModal) closeCaseModal(); });
+
+  skillCards.forEach((card,i)=>{
+    card.setAttribute('tabindex','0');
+    card.setAttribute('role','button');
+    card.setAttribute('aria-label',`查看 ${skillData[i].title} 详情`);
+    card.addEventListener('click',()=>openSkillModal(i));
+    card.addEventListener('keydown',e=>{
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); openSkillModal(i); }
+    });
+  });
+
+  document.getElementById('skillModalClose').addEventListener('click',closeSkillModal);
+  skillModal.addEventListener('click',e=>{ if(e.target===skillModal) closeSkillModal(); });
+
+  // ESC 关闭：按层级 case → skill → work 依次关闭
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape') return;
+    if(caseModal.classList.contains('open')) closeCaseModal();
+    else if(skillModal.classList.contains('open')) closeSkillModal();
+    else if(modal.classList.contains('open')) closeModal();
+  });
+
+  // Mobile nav toggle - close on click
+  document.querySelectorAll('.nav-links a').forEach(a=>{
+    a.addEventListener('click',()=>document.querySelector('.nav-links').classList.remove('open'));
+  });
+
+  // ===== Hero 胶囊导航：滑块跟随 + 滚动高亮 =====
+  const heroNav = document.querySelector('.hero-nav');
+  const heroNavItems = document.querySelectorAll('.hero-nav-item');
+  const heroNavSlider = document.getElementById('heroNavSlider');
+  const sectionIds = ['about','skills','works','contact'];
+
+  function moveHeroNavSlider(item){
+    if(!item || !heroNavSlider) return;
+    const navRect = heroNav.getBoundingClientRect();
+    const itemRect = item.getBoundingClientRect();
+    heroNavSlider.style.left = (itemRect.left - navRect.left) + 'px';
+    heroNavSlider.style.width = itemRect.width + 'px';
+    heroNavSlider.classList.add('show');
+    heroNavItems.forEach(it=>it.classList.remove('active'));
+    item.classList.add('active');
+  }
+
+  // 鼠标 hover 时滑块跟随
+  let hoverLocked = false;
+  heroNavItems.forEach(item=>{
+    item.addEventListener('mouseenter',()=>{ if(!hoverLocked) moveHeroNavSlider(item); });
+    item.addEventListener('click',()=>{ moveHeroNavSlider(item); hoverLocked=true; setTimeout(()=>hoverLocked=false,800); });
+  });
+  // 鼠标离开导航容器，滑块回到 active 项
+  heroNav.addEventListener('mouseleave',()=>{
+    const active = document.querySelector('.hero-nav-item.active');
+    if(active) moveHeroNavSlider(active);
+  });
+
+  // 初始化滑块位置
+  window.addEventListener('load',()=>{
+    const active = document.querySelector('.hero-nav-item.active');
+    if(active) setTimeout(()=>moveHeroNavSlider(active),300);
+  });
+
+  // 滚动时高亮当前所在板块
+  const scrollObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        const id = e.target.id;
+        const item = document.querySelector(`.hero-nav-item[data-nav="${id}"]`);
+        if(item) moveHeroNavSlider(item);
+      }
+    });
+  },{threshold:0.4});
+  sectionIds.forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) scrollObserver.observe(el);
+  });
+</script>
+</body>
+</html>
